@@ -30,7 +30,7 @@ public class DemoApplication {
 
     public static void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15); // 控制时
+        calendar.set(Calendar.HOUR_OF_DAY, 17); // 控制时
         calendar.set(Calendar.MINUTE, 0);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
