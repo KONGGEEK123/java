@@ -30,8 +30,8 @@ public class DemoApplication {
 
     public static void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 17); // 控制时
-        calendar.set(Calendar.MINUTE, 30);    // 控制分
+        calendar.set(Calendar.HOUR_OF_DAY, 20); // 控制时
+        calendar.set(Calendar.MINUTE, 0);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
         Date time = calendar.getTime();     // 得出执行任务的时间,此处为今天的12：00：00
@@ -48,7 +48,7 @@ public class DemoApplication {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost(WEBHOOK_TOKEN);
         httppost.addHeader("Content-Type", "application/json; charset=utf-8");
-        String textMsg = "{ \"msgtype\": \"text\", \"text\": {\"content\": \"今日关键词：福字（测试）\"}}";
+        String textMsg = "{ \"msgtype\": \"text\", \"text\": {\"content\": \"今日关键词：福字\"}}";
         StringEntity se = new StringEntity(textMsg, "utf-8");
         httppost.setEntity(se);
         try {
