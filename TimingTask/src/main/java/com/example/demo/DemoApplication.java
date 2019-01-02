@@ -26,7 +26,6 @@ import java.util.TimerTask;
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-        timer();
     }
 
     public static void timer() {
@@ -64,9 +63,16 @@ public class DemoApplication {
 
     }
 
+    public static boolean isOpen = false;
     @RequestMapping("sendkeyword")
     public String sendKeyword() {
-        return "你调用了发送关键字的接口";
+        if (!isOpen) {
+            timer();
+            isOpen = true;
+            return "定时器已经启动";
+        }else {
+            return "你已经启动了，请勿重新启动";
+        }
     }
 }
 
