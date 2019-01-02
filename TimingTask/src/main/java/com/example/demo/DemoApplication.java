@@ -31,7 +31,7 @@ public class DemoApplication {
 
     public static void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 8); // 控制时
+        calendar.set(Calendar.HOUR_OF_DAY, 11); // 控制时
         calendar.set(Calendar.MINUTE, 0);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
@@ -42,7 +42,7 @@ public class DemoApplication {
                 System.out.println("-------设定要指定任务--------");
                 timingTaskMethod();
             }
-            }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+            }, time, 1000 * 60/* * 60 * 24*/);// 这里设定将延时每天固定执行
         }
     public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=3902e88c20e9ca33f8bd0a13732922fe375d6d8e5c42f34c7b62c32d49c52574";
     public static void timingTaskMethod() {
