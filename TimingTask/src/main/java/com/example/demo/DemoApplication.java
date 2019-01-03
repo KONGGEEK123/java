@@ -28,10 +28,10 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    public static void timer() {
+    public void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 22); // 控制时
-        calendar.set(Calendar.MINUTE, 40);    // 控制分
+        calendar.set(Calendar.HOUR_OF_DAY, 8); // 控制时
+        calendar.set(Calendar.MINUTE, 45);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
         Date time = calendar.getTime();     // 得出执行任务的时间,此处为今天的12：00：00
@@ -45,7 +45,7 @@ public class DemoApplication {
             }, time, 1000 * 60);// 这里设定将延时每天固定执行
         }
     public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=2940cc34e76eb626ddb2d717758ea10731311933ecaf5c21d39bbe53895b9931";
-    public static void timingTaskMethod() {
+    public void timingTaskMethod() {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost(WEBHOOK_TOKEN);
         httppost.addHeader("Content-Type", "application/json; charset=utf-8");
@@ -63,14 +63,17 @@ public class DemoApplication {
         }
     }
 
-    public static boolean isOpen = false;
+    public boolean isOpen = false;
     @RequestMapping("sendkeyword")
     public String sendKeyword() {
+        System.out.println("2222222");
         if (!isOpen) {
+            System.out.println("3333333");
             timer();
             isOpen = true;
             return "定时器已经启动";
         }else {
+            System.out.println("4444444");
             return "你已经启动了，请勿重新启动";
         }
     }
