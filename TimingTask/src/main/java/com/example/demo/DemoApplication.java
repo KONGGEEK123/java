@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import net.minidev.json.JSONObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
@@ -15,10 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.net.www.http.HttpClient;
 import sun.rmi.runtime.Log;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @SpringBootApplication
 @RestController
@@ -30,7 +29,7 @@ public class DemoApplication {
 
     public void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9); // 控制时
+        calendar.set(Calendar.HOUR_OF_DAY, 20); // 控制时
         calendar.set(Calendar.MINUTE, 0);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
@@ -45,11 +44,22 @@ public class DemoApplication {
 //            }, time, 1000 * 60);// 这里设定将延时每天固定执行
         }
     public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=393688554aa42eac442d84f8adb723bd4b6c01aa778ae4f3c11a457122572247";
+//    public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=2940cc34e76eb626ddb2d717758ea10731311933ecaf5c21d39bbe53895b9931";
     public void timingTaskMethod() {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost(WEBHOOK_TOKEN);
         httppost.addHeader("Content-Type", "application/json; charset=utf-8");
-        String textMsg = "{ \"msgtype\": \"text\", \"text\": {\"content\": \"早上好！\"}}";
+        Map map = new HashMap();
+        map.put("msgtype","text");
+
+        Map map1 = new HashMap();
+        map1.put("content",keyword());
+
+        map.put("text",map1);
+
+        JSONObject json =new JSONObject(map);
+        String textMsg = json.toJSONString();
+        System.out.println(textMsg);
         StringEntity se = new StringEntity(textMsg, "utf-8");
         httppost.setEntity(se);
         try {
@@ -61,6 +71,17 @@ public class DemoApplication {
         } catch (Exception e) {
             // TODO: handle exception
         }
+    }
+
+    public String keyword() {
+        String[] strings = {
+                "零食柜","动感单车","豫姐的皇冠","公司专利墙","历代眼镜展柜",
+                "视氪logo","路由器","打印机","任意一台加湿器"
+        };
+        int i = (int) (Math.random() * strings.length - 1);
+        String string = strings[i];
+        string = "今日关键词：" + string + "!";
+        return string;
     }
 
     public boolean isOpen = false;
