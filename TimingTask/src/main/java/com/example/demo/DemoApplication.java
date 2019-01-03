@@ -30,8 +30,8 @@ public class DemoApplication {
 
     public void timer() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 8); // 控制时
-        calendar.set(Calendar.MINUTE, 40);    // 控制分
+        calendar.set(Calendar.HOUR_OF_DAY, 9); // 控制时
+        calendar.set(Calendar.MINUTE, 0);    // 控制分
         calendar.set(Calendar.SECOND, 0);    // 控制秒
 
         Date time = calendar.getTime();     // 得出执行任务的时间,此处为今天的12：00：00
@@ -41,15 +41,15 @@ public class DemoApplication {
                     System.out.println("-------设定要指定任务--------");
                     timingTaskMethod();
                  }
-//            }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
-            }, time, 1000 * 60);// 这里设定将延时每天固定执行
+            }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行
+//            }, time, 1000 * 60);// 这里设定将延时每天固定执行
         }
-    public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=2940cc34e76eb626ddb2d717758ea10731311933ecaf5c21d39bbe53895b9931";
+    public static String WEBHOOK_TOKEN = "https://oapi.dingtalk.com/robot/send?access_token=393688554aa42eac442d84f8adb723bd4b6c01aa778ae4f3c11a457122572247";
     public void timingTaskMethod() {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost(WEBHOOK_TOKEN);
         httppost.addHeader("Content-Type", "application/json; charset=utf-8");
-        String textMsg = "{ \"msgtype\": \"text\", \"text\": {\"content\": \"今日关键词：福字\"}}";
+        String textMsg = "{ \"msgtype\": \"text\", \"text\": {\"content\": \"早上好！\"}}";
         StringEntity se = new StringEntity(textMsg, "utf-8");
         httppost.setEntity(se);
         try {
